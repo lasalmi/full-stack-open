@@ -50,6 +50,17 @@ import { useState } from 'react'
 
 const Header = ({text}) => (<h1>{text}</h1>)
 
+const Statistics = (props) => {
+	<Header text='Statistics'/>
+	if (props.total === 0) {
+		return (<p>No feedback given</p>)
+	}
+	return (
+		<p>Good: {props.good} Neutral: {props.neutral} Bad: {props.bad} Total: {props.total}
+		<Average good={props.good} bad={props.bad} total={props.total}/>
+		<Positive good={props.good} total={props.total}/></p>
+	)
+}
 const Average = ({good, bad, neutral, total}) => {
 	if (total === 0) {
 		return (<p>Average: 0</p>)
@@ -100,9 +111,7 @@ const App = (props) => {
 				<Button handleClick={handleNeutralClick} text={'neutral'}/>
 				<Button handleClick={handleBadClick} text={'bad'}/>
 				<Header text='Statistics' />
-				<Display good={good} bad={bad} neutral={neutral} total={total}/>
-				<Average good={good} bad={bad} neutral={neutral} total={total}/>
-				<Positive good={good} total={total}/>
+				<Statistics good={good} bad={bad} neutral={neutral} total={total}/>
 			</div>
 		</div>
 	)
